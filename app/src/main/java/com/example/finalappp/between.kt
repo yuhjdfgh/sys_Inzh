@@ -3,6 +3,7 @@ package com.example.finalappp
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
@@ -48,6 +49,14 @@ class between : AppCompatActivity() {
 //            }
 //
 //        }
+        val login = intent.getStringExtra("login")
+
+        val buttonProfile = findViewById<ImageButton>(R.id.buttBetweenProfile)
+        buttonProfile.setOnClickListener(){
+            val newStr = Intent(this, profile::class.java)
+            newStr.putExtra("login", login.toString().trim())
+            startActivity(newStr)
+        }
 
         val painterId = findViewById<RecyclerView>(R.id.painterList)
         val painterList = arrayListOf<PainterClass>()

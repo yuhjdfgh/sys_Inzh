@@ -43,15 +43,17 @@ class authorization : AppCompatActivity() {
                 val db = DataBase(this, null)
                 val isAuth = db.getUser(login, password)
                 if (isAuth) {
-                    Toast.makeText(this, "Пользователь $login существует", Toast.LENGTH_LONG).show()
-                    userlogin.text.clear()
-                    userpassword.text.clear()
+                    //Toast.makeText(this, "Пользователь $login существует", Toast.LENGTH_LONG).show()
 
                     val intent = Intent(this, between::class.java)
+                    intent.putExtra("login", login)
                     startActivity(intent)
+
+                    userlogin.text.clear()
+                    userpassword.text.clear()
                 }
                 else{
-                    Toast.makeText(this, "Пользователь $login НЕ существует", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Пользователь $login не существует", Toast.LENGTH_LONG).show()
                 }
             }
 

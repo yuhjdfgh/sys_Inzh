@@ -2,6 +2,7 @@ package com.example.finalappp
 
 import android.content.Context
 import android.content.Intent
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +14,17 @@ import androidx.recyclerview.widget.RecyclerView
 class painterAdapter(var painters: List<PainterClass>, var context: Context):RecyclerView.Adapter<painterAdapter.MyViewHolder>() {
 
     class MyViewHolder(view: View):RecyclerView.ViewHolder(view){
-        val image: ImageView = view.findViewById(R.id.painterImg)
-        val name:TextView = view.findViewById(R.id.painterName)
-        val years:TextView = view.findViewById(R.id.painterYears)
-        val style:TextView = view.findViewById(R.id.painterStyle)
-        val butt: Button = view.findViewById(R.id.painterBut)
+        val image: ImageView = view.findViewById(R.id.painterImg) //портрет
+        val name:TextView = view.findViewById(R.id.painterName) // имя
+        val years:TextView = view.findViewById(R.id.painterYears) // годы жизни
+        val style:TextView = view.findViewById(R.id.painterStyle) // стиль работ
+        val butt: Button = view.findViewById(R.id.painterBut) // кнопка на картины
+        val like:ImageView = view.findViewById(R.id.imgLike) // лайк
+        val dis:ImageView = view.findViewById(R.id.imgDis) // диз
+        val comm:ImageView = view.findViewById(R.id.imgComm) // коммент
+        val countLike:TextView = view.findViewById(R.id.countLike) // кол - во лайков
+        val countDis:TextView = view.findViewById(R.id.countDis) // кол - во дизов
+        val countComm:TextView = view.findViewById(R.id.countComm) // кол - во комментов
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -37,16 +44,10 @@ class painterAdapter(var painters: List<PainterClass>, var context: Context):Rec
         val imageID = context.resources.getIdentifier(painters[position].image, "drawable", context.packageName)
         holder.image.setImageResource(imageID)
 
-//        holder.butt.setOnClickListener{
-//            val intent = Intent(context, picturePodrob::class.java)
-//
-//            intent.putExtra("pictureTitle", pictures[position].title)
-//            intent.putExtra("pictureText", pictures[position].text)
-//            intent.putExtra("pictureText", pictures[position].text)
-//            //intent.putExtra("pictureImg", imageID)
-//
-//            context.startActivity(intent)
-//        }
+        holder.like.setOnClickListener(){
+
+        }
+
 
     }
 

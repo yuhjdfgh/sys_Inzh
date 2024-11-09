@@ -10,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +23,13 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        fun isValidEmail(email: String): Boolean {
+            val regex = Regex("^[a-zA-Z0-9]+@[a-zA-Z0-9]+(\\.[a-zA-Z]{2,3}){1,2}$")
+            return regex.matches(email)
+        }
+
         val userlogin = findViewById<EditText>(R.id.login)
+
         val usermail = findViewById<EditText>(R.id.mail)
         val userpassword = findViewById<EditText>(R.id.password)
         val button = findViewById<Button>(R.id.confirm)
@@ -46,19 +53,23 @@ class MainActivity : AppCompatActivity() {
 
             else{
 
-                //Toast.makeText(this, "Вы заполнили все поля", Toast.LENGTH_LONG).show()
-
-                val user = User(login, mail, password)
-
-                val db = DataBase(this, null)
-                db.addUser(user)
-                Toast.makeText(this, "Пользователь $login добавлен", Toast.LENGTH_LONG).show()
-                userlogin.text.clear()
-                usermail.text.clear()
-                userpassword.text.clear()
+                if ((isValidEmail(mail)) == true){
+                    val user = User(login, mail, password)
+                    val db = DataBase(this, null)
+                    db.addUser(user)
+                    //Toast.makeText(this, "Пользователь $login добавлен", Toast.LENGTH_LONG).show()
+                    val newStr = Intent(this, between::class.java)
+                    newStr.putExtra("login", login)
+                    startActivity(newStr)
+                }
+                else{
+                    Toast.makeText(this, "Почта указана неверено", Toast.LENGTH_SHORT).show()
+                }
             }
 
         }
+
+
 
     }
 }

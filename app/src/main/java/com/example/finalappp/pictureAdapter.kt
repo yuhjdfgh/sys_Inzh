@@ -48,6 +48,8 @@ class pictureAdapter(var pictures: List<Picture>, var context: Context):Recycler
             context.startActivity(intent)
         }
 
+      //  holder.
+
     }
 
 }
