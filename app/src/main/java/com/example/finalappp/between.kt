@@ -4,11 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class between : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,35 +24,44 @@ class between : AppCompatActivity() {
             insets
         }
 
-        val list = findViewById<ListView>(R.id.list1)
+//        val list = findViewById<ListView>(R.id.list1)
+//        val masList: MutableList<String> = mutableListOf()
+//        val adapterList = ArrayAdapter(this, android.R.layout.simple_list_item_1, masList)
+//        list.adapter = adapterList
+//        adapterList.insert("Константин Васильев", 0)
+//        adapterList.insert("Вася Пупкин", 1)
+//        list.setOnItemClickListener { parent, view, position, id ->
+//            val ItemWhichClicked = list.getItemAtPosition(position).toString()
+//            if (ItemWhichClicked == "Константин Васильев"){
+//                Toast.makeText(this, "Вы выбрали Item: $ItemWhichClicked", Toast.LENGTH_SHORT).show()
+//                val who: String = "1"
+//                val newStr = Intent(this, mainStr::class.java)
+//                newStr.putExtra("painter", who)
+//                startActivity(newStr)
+//            }
+//            else if (ItemWhichClicked == "Вася Пупкин"){
+//                Toast.makeText(this, "Вы выбрали Item: $ItemWhichClicked", Toast.LENGTH_SHORT).show()
+//                val who: String = "2"
+//                val newStr = Intent(this, mainStr::class.java)
+//                newStr.putExtra("painter", who)
+//                startActivity(newStr)
+//            }
+//
+//        }
 
-        val masList: MutableList<String> = mutableListOf()
-        val adapterList = ArrayAdapter(this, android.R.layout.simple_list_item_1, masList)
-        list.adapter = adapterList
+        val painterId = findViewById<RecyclerView>(R.id.painterList)
+        val painterList = arrayListOf<PainterClass>()
+        //val painterName: String = intent.getStringExtra("painter").toString()
+        //val naaame = findViewById<TextView>(R.id.namePainter)
 
-        adapterList.insert("Константин Васильев", 0)
-        adapterList.insert("Вася Пупкин", 1)
+        painterList.add(PainterClass(1, "vasilyev", "Константин Васильев", "1942 - 1976", "Костя"))
+        painterList.add(PainterClass(2, "shihkin", "Иван Шишкин", "годы жизни шишка", "шишка"))
 
-        list.setOnItemClickListener { parent, view, position, id ->
-            val ItemWhichClicked = list.getItemAtPosition(position).toString()
 
-            if (ItemWhichClicked == "Константин Васильев"){
-                Toast.makeText(this, "Вы выбрали Item: $ItemWhichClicked", Toast.LENGTH_SHORT).show()
-                val who: String = "1"
-                val newStr = Intent(this, mainStr::class.java)
-                newStr.putExtra("painter", who)
-                startActivity(newStr)
 
-            }
-            else if (ItemWhichClicked == "Вася Пупкин"){
-                Toast.makeText(this, "Вы выбрали Item: $ItemWhichClicked", Toast.LENGTH_SHORT).show()
-                val who: String = "2"
-                val newStr = Intent(this, mainStr::class.java)
-                newStr.putExtra("painter", who)
-                startActivity(newStr)
-            }
 
-        }
+        painterId.layoutManager = LinearLayoutManager(this)
+        painterId.adapter = painterAdapter(painterList, this)
 
     }
 }
