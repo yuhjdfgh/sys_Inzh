@@ -54,6 +54,10 @@ class painterAdapter(var painters: List<PainterClass>, var context: Context):Rec
             context.startActivity(intent)
         }
 
+        holder.like.setOnClickListener(){
+
+        }
+
     }
 
 }

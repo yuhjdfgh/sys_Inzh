@@ -36,7 +36,7 @@ SQLiteOpenHelper(context, "nameDataBase", factory, 1){
         values.put("name", painter.name)
         values.put("yearsOfLife", painter.yearsOfLife)
         values.put("stile", painter.stile)
-        values.put("liki", painter.like)
+        values.put("liki", painter.likes)
         values.put("comm", painter.comm)
         values.put("dis", painter.dis)
 
