@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -40,8 +41,6 @@ class mainStr : AppCompatActivity() {
             pictureList.add(Picture(2, "rozh", "Рожь", "Краткое описание2", "Полное описание2", 200))
             pictureList.add(Picture(3, "dali", "Лесные дали", "Краткое описание3", "Полное описание3", 300))
         }
-
-
 
         pictureId.layoutManager = LinearLayoutManager(this)
         pictureId.adapter = pictureAdapter(pictureList, this)

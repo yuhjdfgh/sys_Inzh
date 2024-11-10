@@ -29,26 +29,18 @@ class authorization : AppCompatActivity() {
         val regStr = findViewById<TextView>(R.id.goToReg)
 
         button.setOnClickListener(){
-
             var login = userlogin.text.toString().trim()
             val password = userpassword.text.toString().trim()
-
-
             if (login == "" || password == ""){
                 Toast.makeText(this, "Вы заполнили не все поля", Toast.LENGTH_LONG).show()
             }
-
             else{
-
                 val db = DataBase(this, null)
                 val isAuth = db.getUser(login, password)
                 if (isAuth) {
-                    //Toast.makeText(this, "Пользователь $login существует", Toast.LENGTH_LONG).show()
-
                     val intent = Intent(this, between::class.java)
                     intent.putExtra("login", login)
                     startActivity(intent)
-
                     userlogin.text.clear()
                     userpassword.text.clear()
                 }
@@ -56,13 +48,10 @@ class authorization : AppCompatActivity() {
                     Toast.makeText(this, "Пользователь $login не существует", Toast.LENGTH_LONG).show()
                 }
             }
-
         }
-
         regStr.setOnClickListener(){
             val newStr = Intent(this, MainActivity::class.java)
             startActivity(newStr)
         }
-
     }
 }

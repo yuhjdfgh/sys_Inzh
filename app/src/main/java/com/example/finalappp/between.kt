@@ -24,7 +24,6 @@ class between : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
 //        val list = findViewById<ListView>(R.id.list1)
 //        val masList: MutableList<String> = mutableListOf()
 //        val adapterList = ArrayAdapter(this, android.R.layout.simple_list_item_1, masList)
@@ -50,25 +49,16 @@ class between : AppCompatActivity() {
 //
 //        }
         val login = intent.getStringExtra("login")
-
         val buttonProfile = findViewById<ImageButton>(R.id.buttBetweenProfile)
         buttonProfile.setOnClickListener(){
             val newStr = Intent(this, profile::class.java)
             newStr.putExtra("login", login.toString().trim())
             startActivity(newStr)
         }
-
         val painterId = findViewById<RecyclerView>(R.id.painterList)
         val painterList = arrayListOf<PainterClass>()
-        //val painterName: String = intent.getStringExtra("painter").toString()
-        //val naaame = findViewById<TextView>(R.id.namePainter)
-
-        painterList.add(PainterClass(1, "vasilyev", "Константин Васильев", "1942 - 1976", "Костя"))
-        painterList.add(PainterClass(2, "shihkin", "Иван Шишкин", "годы жизни шишка", "шишка"))
-
-
-
-
+        painterList.add(PainterClass(1, "vasilyev", "Константин Васильев", "1942 - 1976", "Костя", 0, 0, 0))
+        painterList.add(PainterClass(2, "shihkin", "Иван Шишкин", "годы жизни шишка", "шишка", 0, 0, 0))
         painterId.layoutManager = LinearLayoutManager(this)
         painterId.adapter = painterAdapter(painterList, this)
 

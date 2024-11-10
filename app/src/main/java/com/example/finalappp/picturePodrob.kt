@@ -20,13 +20,9 @@ class picturePodrob : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         val title = findViewById<TextView>(R.id.pictureTitlePodrob)
         val text = findViewById<TextView>(R.id.pictureTextPodrob)
-        //val картинка
-
         title.text = intent.getStringExtra("pictureTitle")
         text.text = intent.getStringExtra("pictureText")
-        //также получить картинку по ключу
     }
 }

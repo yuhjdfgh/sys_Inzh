@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class painterAdapter(var painters: List<PainterClass>, var context: Context):RecyclerView.Adapter<painterAdapter.MyViewHolder>() {
@@ -44,10 +45,14 @@ class painterAdapter(var painters: List<PainterClass>, var context: Context):Rec
         val imageID = context.resources.getIdentifier(painters[position].image, "drawable", context.packageName)
         holder.image.setImageResource(imageID)
 
-        holder.like.setOnClickListener(){
-
+        holder.butt.setOnClickListener(){
+            val intent = Intent(context, mainStr::class.java)
+            var who: String = ""
+            if (holder.name.text == "Константин Васильев"){ who = "1" }
+            else if (holder.name.text == "Иван Шишкин"){ who = "2" }
+            intent.putExtra("painter", who)
+            context.startActivity(intent)
         }
-
 
     }
 

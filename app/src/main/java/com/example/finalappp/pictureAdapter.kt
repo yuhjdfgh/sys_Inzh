@@ -43,12 +43,9 @@ class pictureAdapter(var pictures: List<Picture>, var context: Context):Recycler
             intent.putExtra("pictureTitle", pictures[position].title)
             intent.putExtra("pictureText", pictures[position].text)
             intent.putExtra("pictureText", pictures[position].text)
-            //intent.putExtra("pictureImg", imageID)
 
             context.startActivity(intent)
         }
-
-      //  holder.
 
     }
 
