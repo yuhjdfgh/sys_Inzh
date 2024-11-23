@@ -41,8 +41,6 @@ class threeActIzbrLikeDiz : AppCompatActivity() {
         val sharedPrefs2 = getSharedPreferences("CurrentLogin", Context.MODE_PRIVATE)
         val userId = sharedPrefs2.getString("loginKey", "")
 
-        Toast.makeText(this, userId.toString() + "   " + choice + "   " + choiceText.text, Toast.LENGTH_SHORT).show()
-
         fun load(){
 
             if (choice == "pictures") {
