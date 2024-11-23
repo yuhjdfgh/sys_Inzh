@@ -71,7 +71,7 @@ class threeActIzbrLikeDiz : AppCompatActivity() {
                 val painters = db.getPaintersByIds(painterIds)
 
                 if (painters.isEmpty()) {
-                    choiceText.text = "Пусто"
+                    choiceText.text ="Пусто"
                     itemList.adapter = pictureAdapter(emptyList(), this)
                 } else {
                     itemList.layoutManager = LinearLayoutManager(this)
