@@ -1,5 +1,7 @@
 package com.example.finalappp
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -10,9 +12,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import java.util.regex.Pattern
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,26 +34,62 @@ class MainActivity : AppCompatActivity() {
         val authStr = findViewById<TextView>(R.id.goToAuth)
         authStr.setOnClickListener(){
             val newStr = Intent(this, authorization::class.java)
+            userlogin.text.clear()
+            usermail.text.clear()
+            userpassword.text.clear()
+            newStr.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(newStr)
+            finish()
         }
         button.setOnClickListener(){
             val login = userlogin.text.toString().trim()
             val mail = usermail.text.toString().trim()
             val password = userpassword.text.toString().trim()
             if (login == "" || mail == "" || password == ""){
-                Toast.makeText(this, "Вы заполнили не все поля", Toast.LENGTH_LONG).show()
+                if (login == ""){
+                    userlogin.error = "Поле не заполнено"
+                }
+                if (mail == ""){
+                    usermail.error = "Поле не заполнено"
+                }
+                if (password == ""){
+                    userpassword.error = "Поле не заполнено"
+                }
             }
             else{
                 if ((isValidEmail(mail)) == true){
-                    val user = User(login, mail, password)
                     val db = DataBase(this, null)
-                    db.addUser(user)
-                    val newStr = Intent(this, between::class.java)
-                    newStr.putExtra("login", login)
-                    startActivity(newStr)
+                    var canGo = true
+                    if (db.checkLogin(login) && db.checkMail(mail)){
+                        Toast.makeText(this, "Пользователь с таким логином и почтой уже существует", Toast.LENGTH_SHORT).show()
+                        canGo = false
+
+                    }
+                    else if (db.checkLogin(login)){
+                        Toast.makeText(this, "Пользователь с таким логином уже существует", Toast.LENGTH_SHORT).show()
+                        canGo = false
+                    }
+                    else if (db.checkMail(mail)){
+                        Toast.makeText(this, "Пользователь с такой почтой уже существует", Toast.LENGTH_SHORT).show()
+                        canGo = false
+                    }
+                    else if (canGo == true){
+                        db.addUser(User(login, mail, password))
+                        val newStr = Intent(this, between::class.java)
+                        val sharedPrefs = getSharedPreferences("CurrentLogin", Context.MODE_PRIVATE)
+                        val editor = sharedPrefs.edit()
+                        editor.putString("loginKey", userlogin.text.toString())
+                        editor.apply()
+                        userlogin.text.clear()
+                        usermail.text.clear()
+                        userpassword.text.clear()
+                        newStr.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(newStr)
+                        finish()
+                    }
                 }
                 else{
-                    Toast.makeText(this, "Почта указана неверено", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Неправильный формат почты", Toast.LENGTH_SHORT).show()
                 }
             }
         }

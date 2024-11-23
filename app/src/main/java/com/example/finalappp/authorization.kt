@@ -1,5 +1,7 @@
 package com.example.finalappp
 
+import android.content.SharedPreferences
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -7,7 +9,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -22,36 +23,47 @@ class authorization : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         val userlogin = findViewById<EditText>(R.id.loginAuth)
         val userpassword = findViewById<EditText>(R.id.passwordAuth)
         val button = findViewById<Button>(R.id.confirmAuth)
         val regStr = findViewById<TextView>(R.id.goToReg)
-
         button.setOnClickListener(){
             var login = userlogin.text.toString().trim()
             val password = userpassword.text.toString().trim()
             if (login == "" || password == ""){
-                Toast.makeText(this, "Вы заполнили не все поля", Toast.LENGTH_LONG).show()
+                if (login == ""){
+                    userlogin.error = "Поле не заполнено"
+                }
+                if (password == ""){
+                    userpassword.error = "Поле не заполнено"
+                }
             }
             else{
                 val db = DataBase(this, null)
-                val isAuth = db.getUser(login, password)
-                if (isAuth) {
+                if (db.checkUser(login, password)) {
                     val intent = Intent(this, between::class.java)
-                    intent.putExtra("login", login)
-                    startActivity(intent)
+                    val sharedPrefs = getSharedPreferences("CurrentLogin", Context.MODE_PRIVATE)
+                    val editor = sharedPrefs.edit()
+                    editor.putString("loginKey", userlogin.text.toString())
+                    editor.apply()
                     userlogin.text.clear()
                     userpassword.text.clear()
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
                 }
                 else{
-                    Toast.makeText(this, "Пользователь $login не существует", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Неправильный логин или пароль", Toast.LENGTH_SHORT).show()
                 }
             }
         }
         regStr.setOnClickListener(){
             val newStr = Intent(this, MainActivity::class.java)
+            userlogin.text.clear()
+            userpassword.text.clear()
+            newStr.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(newStr)
+            finish()
         }
     }
 }

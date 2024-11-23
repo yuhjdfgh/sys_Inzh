@@ -1,8 +1,10 @@
 package com.example.finalappp
 
 import android.content.Intent
+import android.media.Image
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -20,9 +22,25 @@ class picturePodrob : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val db = DataBase(this, null)
         val title = findViewById<TextView>(R.id.pictureTitlePodrob)
         val text = findViewById<TextView>(R.id.pictureTextPodrob)
-        title.text = intent.getStringExtra("pictureTitle")
-        text.text = intent.getStringExtra("pictureText")
+        val butt = findViewById<ImageButton>(R.id.buttToBackPictures)
+        val image = findViewById<ImageView>(R.id.pictureImgPodrob)
+        val currPicture = intent.getIntExtra("pictureId", 0)
+        title.text = db.getField(currPicture, "title")
+        text.text = db.getField(currPicture, "text")
+
+        val imageResId = resources.getIdentifier(db.getField(currPicture, "image"), "drawable", packageName)
+        image.setImageResource(imageResId)
+
+
+        butt.setOnClickListener{
+            val newStr = Intent(this, mainStr::class.java)
+            newStr.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(newStr)
+            finish()
+        }
+
     }
 }

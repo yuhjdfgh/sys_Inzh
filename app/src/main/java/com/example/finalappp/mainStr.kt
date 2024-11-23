@@ -1,7 +1,10 @@
 package com.example.finalappp
 
+import android.content.Context
 import android.content.Intent
+import android.media.Image
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -24,26 +27,31 @@ class mainStr : AppCompatActivity() {
             insets
         }
 
+        val buttonToBack = findViewById<ImageButton>(R.id.buttPicturesBack)
+        buttonToBack.setOnClickListener(){
+            val newStr = Intent(this, between::class.java)
+            newStr.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(newStr)
+            finish()
+        }
+
+        val buttonProfile = findViewById<ImageButton>(R.id.buttPicturesProfile)
+        buttonProfile.setOnClickListener(){
+            val newStr = Intent(this, profile::class.java)
+            newStr.putExtra("strToBack", this::class.java.name)
+            newStr.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(newStr)
+            finish()
+        }
+
+        val db = DataBase(this, null)
         val pictureId = findViewById<RecyclerView>(R.id.pictureList)
-        val pictureList = arrayListOf<Picture>()
-        val painterName: String = intent.getStringExtra("painter").toString()
+        val sharedPrefs = getSharedPreferences("CurrentPainter", Context.MODE_PRIVATE)
+        val painterId  = sharedPrefs.getString("painterKey", "").toString().toInt()
         val naaame = findViewById<TextView>(R.id.namePainter)
-
-        if (painterName == "1"){
-            naaame.text = "Константин Ваисльев"
-            pictureList.add(Picture(1, "svyatovit", "Святовит", "Краткое описание1", "Полное описание1", 100))
-            pictureList.add(Picture(2, "wotan", "Вотан", "Краткое описание2", "Полное описание2", 200))
-            pictureList.add(Picture(3, "gusi", "Гуси - Лебеди", "Краткое описание3", "Полное описание3", 300))
-        }
-        else if (painterName == "2"){
-            naaame.text = "Иван Шишкин"
-            pictureList.add(Picture(1, "utro", "Утро в сосновом лесу", "Краткое описание1", "Полное описание1", 100))
-            pictureList.add(Picture(2, "rozh", "Рожь", "Краткое описание2", "Полное описание2", 200))
-            pictureList.add(Picture(3, "dali", "Лесные дали", "Краткое описание3", "Полное описание3", 300))
-        }
-
+        naaame.text = db.getPainterById(painterId)
+        val pictureList = db.getPicturesByPainterId(painterId.toString())
         pictureId.layoutManager = LinearLayoutManager(this)
         pictureId.adapter = pictureAdapter(pictureList, this)
-
     }
 }

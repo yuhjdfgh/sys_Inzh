@@ -97,83 +97,109 @@ android:paddingBottom="35dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:backgroundTint="#420F57"
-        android:text="Узнать подробнее"
+        android:text="Картины"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/painterStyle" />
 
-    <ImageView
-        android:id="@+id/imgDis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/painterBut"
-        app:srcCompat="@drawable/breakheart" />
-
-    <ImageView
-        android:id="@+id/imgComm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="50dp"
-        app:layout_constraintEnd_toStartOf="@+id/imgDis"
-        app:layout_constraintStart_toEndOf="@+id/imgLike"
-        app:layout_constraintTop_toBottomOf="@+id/painterBut"
-        app:srcCompat="@drawable/comment" />
-
-    <ImageView
+    <ImageButton
         android:id="@+id/imgLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
+        android:padding="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/painterBut"
-        app:srcCompat="@drawable/heart" />
+        app:srcCompat="@drawable/heart"
+        android:contentDescription="@string/app_name"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/countLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="110dp"
         android:text="0"
-        android:textColor="@color/white"
-        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgLike"
-        app:layout_constraintVertical_bias="1.0" />
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:layout_marginStart="65dp"/>
 
-    <TextView
-        android:id="@+id/countComm"
+    <ImageButton
+        android:padding="0dp"
+        android:contentDescription="@string/app_name"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="20dp"
+        android:id="@+id/imgComm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:text="0"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/countLike"
-        app:layout_constraintTop_toBottomOf="@+id/imgComm"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toStartOf="@+id/imgDis"
+        app:layout_constraintStart_toEndOf="@+id/imgLike"
+        app:layout_constraintTop_toBottomOf="@+id/painterBut"
+        app:srcCompat="@drawable/comment" />
+
+    <ImageButton
+        android:id="@+id/imgDis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="50dp"
+        android:padding="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/painterBut"
+        app:srcCompat="@drawable/breakheart"
+        android:contentDescription="@string/app_name"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/countDis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
-        android:textColor="@color/white"
-        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.435"
-        app:layout_constraintStart_toEndOf="@+id/countComm"
         app:layout_constraintTop_toBottomOf="@+id/imgDis"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:layout_marginEnd="65dp" />
+
+    <TextView
+        android:id="@+id/countComm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="25dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/countDis"
+        app:layout_constraintStart_toEndOf="@+id/countLike"
+        app:layout_constraintTop_toBottomOf="@+id/imgComm" />
+
+    <ImageButton
+        android:id="@+id/imgIzbr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:padding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.03"
+        app:srcCompat="@drawable/heartclear"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,6 +17,15 @@
         android:theme="@style/Theme.FinalAppp"
         tools:targetApi="31">
         <activity
+            android:name=".ChoiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".threeActIzbrLikeDiz"
+            android:exported="false" />
+        <activity
+            android:name=".commentActivity"
+            android:exported="false" />
+        <activity
             android:name=".profile"
             android:exported="false" />
         <activity
