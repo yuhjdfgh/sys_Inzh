@@ -189,17 +189,6 @@ SQLiteOpenHelper(context, "nameDataBase", factory, 1){
         return likes.toString()
     }
     @SuppressLint("Range")
-    fun getCommCount(idd: Int): String{
-        val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT comm FROM painters WHERE id = '$idd'", null)
-        var comm = 0
-        if (cursor.moveToFirst()){
-            comm = cursor.getInt(cursor.getColumnIndex("comm"))
-        }
-        cursor.close()
-        return comm.toString()
-    }
-    @SuppressLint("Range")
     fun getDisCount(idd: Int): String{
         val db = this.readableDatabase
         val cursor = db.rawQuery("SELECT dis FROM painters WHERE id = '$idd'", null)
@@ -551,5 +540,4 @@ SQLiteOpenHelper(context, "nameDataBase", factory, 1){
         cursor.close()
         return ids
     }
-
 }

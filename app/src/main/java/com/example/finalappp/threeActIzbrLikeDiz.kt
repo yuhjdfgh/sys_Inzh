@@ -31,20 +31,13 @@ class threeActIzbrLikeDiz : AppCompatActivity() {
             startActivity(newStr)
             finish()
         }
-
-        //val choice = intent.getStringExtra("choice")
-
         val sharedPrefs1 = getSharedPreferences("CurrentChoicePicPaint", Context.MODE_PRIVATE)
         val choice = sharedPrefs1.getString("choiceKeyPicPaint", "")
-
-
         val db = DataBase(this, null)
-
         val itemList = findViewById<RecyclerView>(R.id.itemList)
         val sharedPrefs = getSharedPreferences("CurrentChoice", Context.MODE_PRIVATE)
         val choiceText = findViewById<TextView>(R.id.nameStr)
         choiceText.text = sharedPrefs.getString("choiceKey", "").toString()
-
         val sharedPrefs2 = getSharedPreferences("CurrentLogin", Context.MODE_PRIVATE)
         val userId = sharedPrefs2.getString("loginKey", "")
 

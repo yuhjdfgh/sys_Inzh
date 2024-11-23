@@ -31,8 +31,6 @@ class ChoiceActivity : AppCompatActivity() {
 
     private fun navigateToNextActivity(choice: String) {
         val intent = Intent(this, threeActIzbrLikeDiz::class.java)
-        //intent.putExtra("choice", choice)
-
         val sharedPrefs = getSharedPreferences("CurrentChoicePicPaint", Context.MODE_PRIVATE)
         val editor = sharedPrefs.edit()
         editor.putString("choiceKeyPicPaint", choice)

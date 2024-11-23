@@ -56,16 +56,13 @@ class painterAdapter(var painters: List<PainterClass>, var context: Context):Rec
 
         if (db.checkStatusIzbr(db.getUserByName(currLogin), painters[position].id, "izbrPainter", "painterId")){
             if (db.findIsIzbr(db.getUserByName(currLogin), painters[position].id, "izbrPainter", "painterId") == 1){
-                Toast.makeText(context, "Уже было", Toast.LENGTH_SHORT).show()
                 holder.izbr.setImageResource(R.drawable.heartizbr)
             }
             else if (db.findIsIzbr(db.getUserByName(currLogin), painters[position].id, "izbrPainter", "painterId") == 0){
-                Toast.makeText(context, "Уже было", Toast.LENGTH_SHORT).show()
                 holder.izbr.setImageResource(R.drawable.heartclear)
             }
         }
         else{
-            Toast.makeText(context, "Еще не было", Toast.LENGTH_SHORT).show()
             holder.izbr.setImageResource(R.drawable.heartclear)
         }
 
@@ -157,19 +154,16 @@ class painterAdapter(var painters: List<PainterClass>, var context: Context):Rec
             if (db.checkStatusIzbr(db.getUserByName(currLogin), painters[position].id, "izbrPainter", "painterId")){
                 val isIzbr = db.findIsIzbr(db.getUserByName(currLogin), painters[position].id, "izbrPainter", "painterId")
                 if (isIzbr == 1){
-                    Toast.makeText(context, db.getUserByName(currLogin).toString() + "   " + painters[position].id.toString() + "   1", Toast.LENGTH_SHORT).show()
                     db.changeStatusIzbr(db.getUserByName(currLogin), painters[position].id, "izbrPainter", "painterId", 0)
                     holder.izbr.setImageResource(R.drawable.heartclear)
                 }
                 else if (isIzbr == 0){
-                    Toast.makeText(context, db.getUserByName(currLogin).toString() + "   " + painters[position].id.toString() + "   2", Toast.LENGTH_SHORT).show()
                     db.changeStatusIzbr(db.getUserByName(currLogin), painters[position].id, "izbrPainter", "painterId", 1)
                     holder.izbr.setImageResource(R.drawable.heartizbr)
                 }
             }
             else{
                 db.chooseStatusIzbr(db.getUserByName(currLogin), painters[position].id, 1,"izbrPainter", "painterId")
-                Toast.makeText(context, db.getUserByName(currLogin).toString() + "   " + painters[position].id.toString() + "   3", Toast.LENGTH_SHORT).show()
                 holder.izbr.setImageResource(R.drawable.heartizbr)
             }
         }

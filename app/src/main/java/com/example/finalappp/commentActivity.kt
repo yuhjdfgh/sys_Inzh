@@ -38,13 +38,11 @@ class commentActivity : AppCompatActivity() {
             fun loadComments() {
                 masList.clear()
                 val comments = db.getAllCommPainter(whichPainter)
-                Log.d("loadComments", "Comments retrieved: ${comments.size}")
                 if (comments.isEmpty()) {
                     masList.add("Комментариев пока нет.")
                 } else {
                     comments.forEach { comment ->
                         val userName = db.getUserById(comment.idUser)
-                        Log.d("loadComments", "User: $userName, Comment: ${comment.comment}")
                         masList.add("$userName: ${comment.comment}")
                     }
                 }

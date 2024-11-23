@@ -55,16 +55,13 @@ class pictureAdapter(var pictures: List<Picture>, var context: Context):Recycler
 
         if (db.checkStatusIzbr(db.getUserByName(currLogin), pictures[position].id, "izbrPicture", "pictureId")){
             if (db.findIsIzbr(db.getUserByName(currLogin), pictures[position].id, "izbrPicture", "pictureId") == 1){
-                Toast.makeText(context, "Уже было", Toast.LENGTH_SHORT).show()
                 holder.izbr.setImageResource(R.drawable.heartizbr)
             }
             else if (db.findIsIzbr(db.getUserByName(currLogin), pictures[position].id, "izbrPicture", "pictureId") == 0){
-                Toast.makeText(context, "Уже было", Toast.LENGTH_SHORT).show()
                 holder.izbr.setImageResource(R.drawable.heartclear)
             }
         }
         else{
-            Toast.makeText(context, "Еще не было", Toast.LENGTH_SHORT).show()
             holder.izbr.setImageResource(R.drawable.heartclear)
         }
 
@@ -141,7 +138,6 @@ class pictureAdapter(var pictures: List<Picture>, var context: Context):Recycler
             val aaa = "2"
             intent.putExtra("whichComm", aaa)
             intent.putExtra("strToBack", (context as AppCompatActivity)::class.java.name)
-            Toast.makeText(context, "$aaa", Toast.LENGTH_SHORT).show()
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             context.startActivity(intent)
         }
@@ -151,19 +147,16 @@ class pictureAdapter(var pictures: List<Picture>, var context: Context):Recycler
             if (db.checkStatusIzbr(db.getUserByName(currLogin), pictures[position].id, "izbrPicture", "pictureId")){
                 val isIzbr = db.findIsIzbr(db.getUserByName(currLogin), pictures[position].id, "izbrPicture", "pictureId")
                 if (isIzbr == 1){
-                    Toast.makeText(context, db.getUserByName(currLogin).toString() + "   " + pictures[position].id.toString() + "   1", Toast.LENGTH_SHORT).show()
                     db.changeStatusIzbr(db.getUserByName(currLogin), pictures[position].id, "izbrPicture", "pictureId", 0)
                     holder.izbr.setImageResource(R.drawable.heartclear)
                 }
                 else if (isIzbr == 0){
-                    Toast.makeText(context, db.getUserByName(currLogin).toString() + "   " + pictures[position].id.toString() + "   2", Toast.LENGTH_SHORT).show()
                     db.changeStatusIzbr(db.getUserByName(currLogin), pictures[position].id, "izbrPicture", "pictureId", 1)
                     holder.izbr.setImageResource(R.drawable.heartizbr)
                 }
             }
             else{
                 db.chooseStatusIzbr(db.getUserByName(currLogin), pictures[position].id, 1,"izbrPicture", "pictureId")
-                Toast.makeText(context, db.getUserByName(currLogin).toString() + "   " + pictures[position].id.toString() + "   3", Toast.LENGTH_SHORT).show()
                 holder.izbr.setImageResource(R.drawable.heartizbr)
             }
         }
