@@ -1,7 +1,6 @@
-package com.example.finalappp
+package com.example.finalappp.activitys
 
 import android.content.Intent
-import android.media.Image
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -10,7 +9,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import org.w3c.dom.Text
+import com.example.finalappp.DataBase
+import com.example.finalappp.R
 
 class picturePodrob : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

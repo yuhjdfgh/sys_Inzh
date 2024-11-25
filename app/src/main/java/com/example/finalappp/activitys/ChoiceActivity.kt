@@ -1,11 +1,11 @@
-package com.example.finalappp
+package com.example.finalappp.activitys
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.finalappp.R
 
 class ChoiceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

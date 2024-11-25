@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:background="#F0EFEF"
 
-    tools:context=".authorization">
+    tools:context=".activitys.authorization">
 
 
     <TextView

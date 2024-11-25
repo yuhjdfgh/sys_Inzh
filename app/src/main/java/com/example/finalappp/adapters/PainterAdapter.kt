@@ -1,8 +1,7 @@
-package com.example.finalappp
+package com.example.finalappp.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,13 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.finalappp.DataBase
+import com.example.finalappp.R
+import com.example.finalappp.activitys.commentActivity
+import com.example.finalappp.activitys.mainStr
+import com.example.finalappp.classes.PainterClass
 
 class painterAdapter(var painters: List<PainterClass>, var context: Context):RecyclerView.Adapter<painterAdapter.MyViewHolder>() {
 
@@ -54,11 +57,11 @@ class painterAdapter(var painters: List<PainterClass>, var context: Context):Rec
         val sharedPrefs = context.getSharedPreferences("CurrentLogin", Context.MODE_PRIVATE)
         val currLogin: String = sharedPrefs.getString("loginKey", "").toString()
 
-        if (db.checkStatusIzbr(db.getUserByName(currLogin), painters[position].id, "izbrPainter", "painterId")){
-            if (db.findIsIzbr(db.getUserByName(currLogin), painters[position].id, "izbrPainter", "painterId") == 1){
+        if (db.checkStatusFav(db.getUserByName(currLogin), painters[position].id, "PainterFavorites", "painter_id")){
+            if (db.findIsFav(db.getUserByName(currLogin), painters[position].id, "PainterFavorites", "painter_id") == 1){
                 holder.izbr.setImageResource(R.drawable.heartizbr)
             }
-            else if (db.findIsIzbr(db.getUserByName(currLogin), painters[position].id, "izbrPainter", "painterId") == 0){
+            else if (db.findIsFav(db.getUserByName(currLogin), painters[position].id, "PainterFavorites", "painter_id") == 0){
                 holder.izbr.setImageResource(R.drawable.heartclear)
             }
         }
@@ -151,19 +154,19 @@ class painterAdapter(var painters: List<PainterClass>, var context: Context):Rec
 
         holder.izbr.setOnClickListener {
             val db = DataBase(context, null)
-            if (db.checkStatusIzbr(db.getUserByName(currLogin), painters[position].id, "izbrPainter", "painterId")){
-                val isIzbr = db.findIsIzbr(db.getUserByName(currLogin), painters[position].id, "izbrPainter", "painterId")
+            if (db.checkStatusFav(db.getUserByName(currLogin), painters[position].id, "PainterFavorites", "painter_id")){
+                val isIzbr = db.findIsFav(db.getUserByName(currLogin), painters[position].id, "PainterFavorites", "painter_id")
                 if (isIzbr == 1){
-                    db.changeStatusIzbr(db.getUserByName(currLogin), painters[position].id, "izbrPainter", "painterId", 0)
+                    db.changeStatusFav(db.getUserByName(currLogin), painters[position].id, "PainterFavorites", "painter_id", 0)
                     holder.izbr.setImageResource(R.drawable.heartclear)
                 }
                 else if (isIzbr == 0){
-                    db.changeStatusIzbr(db.getUserByName(currLogin), painters[position].id, "izbrPainter", "painterId", 1)
+                    db.changeStatusFav(db.getUserByName(currLogin), painters[position].id, "PainterFavorites", "painter_id", 1)
                     holder.izbr.setImageResource(R.drawable.heartizbr)
                 }
             }
             else{
-                db.chooseStatusIzbr(db.getUserByName(currLogin), painters[position].id, 1,"izbrPainter", "painterId")
+                db.chooseStatusFav(db.getUserByName(currLogin), painters[position].id, 1,"PainterFavorites", "painter_id")
                 holder.izbr.setImageResource(R.drawable.heartizbr)
             }
         }

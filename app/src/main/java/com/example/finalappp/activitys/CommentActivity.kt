@@ -1,15 +1,18 @@
-package com.example.finalappp
+package com.example.finalappp.activitys
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.finalappp.DataBase
+import com.example.finalappp.R
+import com.example.finalappp.classes.CommentClass
+import com.example.finalappp.classes.commentPicture
 
 class commentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,7 +101,7 @@ class commentActivity : AppCompatActivity() {
                     db.addCommPicture(commentPicture(whichPicture, userID, newComment))
                     editComm.setText("")
                     loadComments()
-                    db.changeReactionPicture(whichPicture, "comments", "+")
+                    db.changeReactionPicture(whichPicture, "PainterComments", "+")
                 }
             }
 

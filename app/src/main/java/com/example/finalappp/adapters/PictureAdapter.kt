@@ -1,4 +1,4 @@
-package com.example.finalappp
+package com.example.finalappp.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -9,9 +9,13 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.finalappp.DataBase
+import com.example.finalappp.R
+import com.example.finalappp.activitys.commentActivity
+import com.example.finalappp.activitys.picturePodrob
+import com.example.finalappp.classes.Picture
 
 class pictureAdapter(var pictures: List<Picture>, var context: Context):RecyclerView.Adapter<pictureAdapter.MyViewHolder>() {
 
@@ -53,11 +57,11 @@ class pictureAdapter(var pictures: List<Picture>, var context: Context):Recycler
         val sharedPrefs = context.getSharedPreferences("CurrentLogin", Context.MODE_PRIVATE)
         val currLogin: String = sharedPrefs.getString("loginKey", "").toString()
 
-        if (db.checkStatusIzbr(db.getUserByName(currLogin), pictures[position].id, "izbrPicture", "pictureId")){
-            if (db.findIsIzbr(db.getUserByName(currLogin), pictures[position].id, "izbrPicture", "pictureId") == 1){
+        if (db.checkStatusFav(db.getUserByName(currLogin), pictures[position].id, "PictureFavorites", "picture_id")){
+            if (db.findIsFav(db.getUserByName(currLogin), pictures[position].id, "PictureFavorites", "picture_id") == 1){
                 holder.izbr.setImageResource(R.drawable.heartizbr)
             }
-            else if (db.findIsIzbr(db.getUserByName(currLogin), pictures[position].id, "izbrPicture", "pictureId") == 0){
+            else if (db.findIsFav(db.getUserByName(currLogin), pictures[position].id, "PictureFavorites", "picture_id") == 0){
                 holder.izbr.setImageResource(R.drawable.heartclear)
             }
         }
@@ -144,19 +148,19 @@ class pictureAdapter(var pictures: List<Picture>, var context: Context):Recycler
 
         holder.izbr.setOnClickListener {
             val db = DataBase(context, null)
-            if (db.checkStatusIzbr(db.getUserByName(currLogin), pictures[position].id, "izbrPicture", "pictureId")){
-                val isIzbr = db.findIsIzbr(db.getUserByName(currLogin), pictures[position].id, "izbrPicture", "pictureId")
+            if (db.checkStatusFav(db.getUserByName(currLogin), pictures[position].id, "PictureFavorites", "picture_id")){
+                val isIzbr = db.findIsFav(db.getUserByName(currLogin), pictures[position].id, "PictureFavorites", "picture_id")
                 if (isIzbr == 1){
-                    db.changeStatusIzbr(db.getUserByName(currLogin), pictures[position].id, "izbrPicture", "pictureId", 0)
+                    db.changeStatusFav(db.getUserByName(currLogin), pictures[position].id, "PictureFavorites", "picture_id", 0)
                     holder.izbr.setImageResource(R.drawable.heartclear)
                 }
                 else if (isIzbr == 0){
-                    db.changeStatusIzbr(db.getUserByName(currLogin), pictures[position].id, "izbrPicture", "pictureId", 1)
+                    db.changeStatusFav(db.getUserByName(currLogin), pictures[position].id, "PictureFavorites", "picture_id", 1)
                     holder.izbr.setImageResource(R.drawable.heartizbr)
                 }
             }
             else{
-                db.chooseStatusIzbr(db.getUserByName(currLogin), pictures[position].id, 1,"izbrPicture", "pictureId")
+                db.chooseStatusFav(db.getUserByName(currLogin), pictures[position].id, 1,"PictureFavorites", "picture_id")
                 holder.izbr.setImageResource(R.drawable.heartizbr)
             }
         }

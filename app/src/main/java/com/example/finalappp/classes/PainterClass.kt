@@ -1,4 +1,4 @@
-package com.example.finalappp
+package com.example.finalappp.classes
 
 class PainterClass(
     val id: Int,

@@ -17,31 +17,31 @@
         android:theme="@style/Theme.FinalAppp"
         tools:targetApi="31">
         <activity
-            android:name=".ChoiceActivity"
+            android:name=".activitys.ChoiceActivity"
             android:exported="false" />
         <activity
-            android:name=".threeActIzbrLikeDiz"
+            android:name=".activitys.threeActIzbrLikeDiz"
             android:exported="false" />
         <activity
-            android:name=".commentActivity"
+            android:name=".activitys.commentActivity"
             android:exported="false" />
         <activity
-            android:name=".profile"
+            android:name=".activitys.profile"
             android:exported="false" />
         <activity
-            android:name=".between"
+            android:name=".activitys.between"
             android:exported="false" />
         <activity
-            android:name=".picturePodrob"
+            android:name=".activitys.picturePodrob"
             android:exported="false" />
         <activity
-            android:name=".mainStr"
+            android:name=".activitys.mainStr"
             android:exported="false" />
         <activity
-            android:name=".authorization"
+            android:name=".activitys.authorization"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activitys.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

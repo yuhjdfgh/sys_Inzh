@@ -1,20 +1,19 @@
-package com.example.finalappp
+package com.example.finalappp.activitys
 
 import android.content.Context
 import android.content.Intent
-import android.media.Image
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.finalappp.DataBase
+import com.example.finalappp.R
+import com.example.finalappp.adapters.pictureAdapter
 
 class mainStr : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

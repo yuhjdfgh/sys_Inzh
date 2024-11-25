@@ -1,17 +1,20 @@
-package com.example.finalappp
+package com.example.finalappp.activitys
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.finalappp.DataBase
+import com.example.finalappp.R
+import com.example.finalappp.adapters.painterAdapter
+import com.example.finalappp.adapters.pictureAdapter
 
 class threeActIzbrLikeDiz : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +48,7 @@ class threeActIzbrLikeDiz : AppCompatActivity() {
 
             if (choice == "pictures") {
                 val pictureIds = when (choiceText.text) {
-                    "Избранное" -> db.getIzbrPictureIds(userId.toString().toInt())
+                    "Избранное" -> db.getFavPictureIds(userId.toString().toInt())
                     "Понравилось" -> db.getReactedPictureIds(userId.toString().toInt(), 1) // Лайки с реакцией 1
                     "Не понравилось" -> db.getReactedPictureIds(userId.toString().toInt(), -1) // Дизлайки с реакцией -1
                     else -> emptyList()
@@ -61,7 +64,7 @@ class threeActIzbrLikeDiz : AppCompatActivity() {
                 }
             } else if (choice == "painters") {
                 val painterIds = when (choiceText.text) {
-                    "Избранное" -> db.getIzbrPainterIds(userId.toString().toInt())
+                    "Избранное" -> db.getFavPainterIds(userId.toString().toInt())
                     "Понравилось" -> db.getReactedPainterIds(userId.toString().toInt(), 1) // Лайки с реакцией 1
                     "Не понравилось" -> db.getReactedPainterIds(userId.toString().toInt(), -1) // Дизлайки с реакцией -1
                     else -> emptyList()
@@ -88,4 +91,3 @@ class threeActIzbrLikeDiz : AppCompatActivity() {
 
     }
 }
-
